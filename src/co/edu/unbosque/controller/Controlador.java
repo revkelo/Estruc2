@@ -19,6 +19,7 @@ public class Controlador {
 	private double random2;
 	private double random3;
 	private Fachada model;
+	private String eleccion21;
 	private boolean ciclo = true;
 
 	public Controlador() {
@@ -31,111 +32,155 @@ public class Controlador {
 	public void ejecutar() {
 		while (ciclo = true) {
 			try {
-			miconsola.imprimirString("Taller");
-			miconsola.imprimirString(
-					"1) Cargar estudiantes 2) Estudiante mejor promedio  3) Materia que mas perdieron estudiantes  4) Mostrar  5) Salir");
+				miconsola.imprimirString("Taller");
+				miconsola.imprimirString(
+						"1) Cargar estudiantes 2) Estudiante mejor promedio  3) Materia que mas perdieron estudiantes  4) Mostrar  5) Salir");
 
-			String eleccion21 = miconsola.leerTexto();
-			int eleccion = Integer.parseInt(eleccion21);
-			switch (eleccion) {
-			case 1:
+				 eleccion21 = miconsola.leerTexto();
+				int eleccion = Integer.parseInt(eleccion21);
+				switch (eleccion) {
+				case 1:
 
-				if (comprobante == 0) {
+					if (comprobante == 0) {
 
-					for (int i = 0; i < 10; i++) {
+						for (int i = 0; i < 10; i++) {
 
-						nota_materia1();
-						nota_materia2();
-						nota_materia3();
+							nota_materia1();
+							nota_materia2();
+							nota_materia3();
 
-						double promedio = random1 + random2 + random3;
-						promedio = promedio / 3;
+							double promedio = random1 + random2 + random3;
+							promedio = promedio / 3;
 
-						DecimalFormat df = new DecimalFormat("#.##");
-						String formato_decimal = df.format(promedio);
-						promedio = Double.parseDouble(formato_decimal);
+							DecimalFormat df = new DecimalFormat("#.##");
+							String formato_decimal = df.format(promedio);
+							promedio = Double.parseDouble(formato_decimal);
 
-						model.getAsigdao().guardar_materia1("Materia 1", "Estudiante " + (i + 1), random1);
-						model.getAsigdao().guardar_materia2("Materia 2", "Estudiante " + (i + 1), random2);
-						model.getAsigdao().guardar_materia3("Materia 3", "Estudiante " + (i + 1), random3);
+							model.getAsigdao().guardar_materia1("Materia 1", "Estudiante " + (i + 1), random1);
+							model.getAsigdao().guardar_materia2("Materia 2", "Estudiante " + (i + 1), random2);
+							model.getAsigdao().guardar_materia3("Materia 3", "Estudiante " + (i + 1), random3);
 
-						model.getEstudao().guardar("Estudiante " + (i + 1), random1, random2, random3, promedio);
+							model.getEstudao().guardar("Estudiante " + (i + 1), random1, random2, random3, promedio);
+
+						}
+
+						miconsola.imprimirString("Se cargaron los estudiantes perfectamente");
+
+						comprobante = 1;
+					} else {
+						miconsola.imprimirString("Ya se cargaron los estudiantes");
+
 
 					}
+					break;
+
+				case 2:
+					if (comprobante == 0) {
+						miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+					} else {
+
+						model.getOrde().burbujaPromedioDescendente(model.getEstudao().getLista());
+						model.getEstudao().mostrar();
+						respaldo();
+
+
+					}
+					break;
+				case 3:
+					if (comprobante == 0) {
+						miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+					} else {
+
+
+						materiasPerdidas();
+					}
+					break;
+				case 4:
+					miconsola.imprimirString(
+							"1) Mostrar Estudiantes 2) Mostrar Materia 1  3) Mostrar Materia 2  4) Mostrar Materia 3 ");
+
+					int eleccion1 = miconsola.leerEntero();
+
+					switch (eleccion1) {
+					case 1:
+
+						if (comprobante == 0) {
+							miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+						} else {
+
+
+
+
+							model.getEstudao().mostrar();
+						}
+
+
+						break;
+					case 2:
+						if (comprobante == 0) {
+							miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+						} else {
+
+
+
+
+							model.getAsigdao().mostrar_materia1();
+						}
+						break;
+					case 3:
+						if (comprobante == 0) {
+							miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+						} else {
+
+
+
+
+							model.getAsigdao().mostrar_materia2();
+						}
+						break;
+					case 4:
+						if (comprobante == 0) {
+							miconsola.imprimirString("Porfavor cargue los estudiantes");
+
+						} else {
+
+
+
+
+							model.getAsigdao().mostrar_materia3();
+						}
+						break;
+
+					default:
+						miconsola.imprimirString("Error");
+
+						break;
+					}
+
+					break;
+				case 5:
+
+					System.exit(1);
+					break;
+
+				default:
 				
-					miconsola.imprimirString("Se cargaron los estudiantes perfectamente");
-					
-					comprobante = 1;
-				} else {
-					miconsola.imprimirString("Ya se cargaron los estudiantes");
+					miconsola.imprimirString("Error");
+					break;
+				}
+				
 		
+				
+			} catch (Exception e) {
 			
 				}
-				break;
-
-			case 2:
-				if (comprobante == 0) {
-					miconsola.imprimirString("Porfavor cargue los estudiantes");
-
-				} else {
-				
-					model.getOrde().burbujaPromedioDescendente(model.getEstudao().getLista());
-					model.getEstudao().mostrar();
-					respaldo();
-
-
-				}
-				break;
-			case 3:
-				if (comprobante == 0) {
-					miconsola.imprimirString("Porfavor cargue los estudiantes");
-
-				} else {
-				
-
-					materiasPerdidas();
-				}
-				break;
-			case 4:
-				miconsola.imprimirString(
-						"1) Mostrar Estudiantes 2) Mostrar Materia 1  3) Mostrar Materia 2  4) Mostrar Materia 3 ");
-
-				int eleccion1 = miconsola.leerEntero();
-				
-			switch (eleccion1) {
-			case 1:
-				model.getEstudao().mostrar();
-				break;
-			case 2:
-				model.getAsigdao().mostrar_materia1();
-				break;
-			case 3:
-				model.getAsigdao().mostrar_materia2();
-				break;
-			case 4:
-				model.getAsigdao().mostrar_materia3();
-				break;
-
-			default:
-				miconsola.imprimirString("Error");
-
-				break;
-			}
-				
-				break;
-			case 5:
-
-				System.exit(1);
-				break;
-
-			default:
-				miconsola.imprimirString("Error");
-				break;
-			}} catch (Exception e) {
-				miconsola.imprimirString("Error");
-			}
 		}
-			
+
 
 	}
 
@@ -231,18 +276,18 @@ public class Controlador {
 						"Y la materia que tiene Mayor cantidad de estudiantes perdiendo es " + materia_mayor+" y tiene "+mayor );
 				miconsola.imprimirString(
 						"Tenemos la misma cantidad de estudiantes perdiendo la materia "+ menor +" y "+materia_segmayor+"  que es " + mayor);
-			
-				
+
+
 			}else {
 				miconsola.imprimirString(materia_mayor + " Tiene " + mayor + " Estudiantes Perdiendo esta asignatura");
 				miconsola.imprimirString("Mayor " + mayor + " " + materia_mayor);
 				miconsola.imprimirString("Segundo mayor " + segundo_m + " " + materia_segmayor);
 				miconsola.imprimirString("menor " + menor + " " + materia_menor);
 			}
-			
+
 		}
 	}
-	
+
 
 	public double nota_materia1() {
 		Random random = new Random();
