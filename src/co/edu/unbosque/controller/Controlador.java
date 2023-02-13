@@ -1,3 +1,4 @@
+
 package co.edu.unbosque.controller;
 
 import java.text.DecimalFormat;
@@ -144,24 +145,12 @@ public class Controlador {
 			comprobante1 = 1;
 		}
 
-		if (perdidos_materia1 == perdidos_materia2) {
-			miconsola.imprimirString(
-					"Tenemos la misma cantidad de estudiantes perdiendo la materia 1 y 2  que es " + perdidos_materia1);
-			miconsola.imprimirString(
-					"Y la materia que tiene menor cantidad de estudiantes perdiendo es " + perdidos_materia3);
-		} else if (perdidos_materia2 == perdidos_materia3) {
-			miconsola.imprimirString(
-					"Tenemos la misma cantidad de estudiantes perdiendo la materia 2 y 3  que es " + perdidos_materia2);
-			miconsola.imprimirString(
-					"Y la materia que tiene menor cantidad de estudiantes perdiendo es " + perdidos_materia1);
 
-		} else if (perdidos_materia1 == perdidos_materia3) {
+		if (perdidos_materia1 == perdidos_materia2 && perdidos_materia3 == perdidos_materia2) {
 			miconsola.imprimirString(
-					"Tenemos la misma cantidad de estudiantes perdiendo la materia 1 y 3  que es " + perdidos_materia3);
-			miconsola.imprimirString(
-					"Y la materia que tiene menor cantidad de estudiantes perdiendo es " + perdidos_materia2);
+					"Las 3 asignaturas tienen la misma cantidad de estudiantes perdiendo su materia que es " + perdidos_materia1);
 
-		} else {
+		}else {
 
 			int mayor = 0;
 			int segundo_m = 0;
@@ -201,13 +190,31 @@ public class Controlador {
 				materia_menor = "Materia 3";
 			}
 
-			miconsola.imprimirString(materia_mayor + " Tiene " + mayor + " Estudiantes Perdiendo esta asignatura");
-			miconsola.imprimirString("Mayor " + mayor + " " + materia_mayor);
-			miconsola.imprimirString("Segundo mayor " + segundo_m + " " + materia_segmayor);
-			miconsola.imprimirString("menor " + menor + " " + materia_menor);
 
+
+
+			if (mayor == segundo_m) {
+				miconsola.imprimirString(
+						"Tenemos la misma cantidad de estudiantes perdiendo la materia "+ materia_mayor +" y "+materia_segmayor+"  que es " + mayor);
+				miconsola.imprimirString(
+						"Y la materia que tiene menor cantidad de estudiantes perdiendo es " + materia_menor+" y tiene "+menor );
+			} else if(menor == segundo_m){
+				miconsola.imprimirString(
+						"Y la materia que tiene Mayor cantidad de estudiantes perdiendo es " + materia_mayor+" y tiene "+mayor );
+				miconsola.imprimirString(
+						"Tenemos la misma cantidad de estudiantes perdiendo la materia "+ menor +" y "+materia_segmayor+"  que es " + mayor);
+			
+				
+			}else {
+				miconsola.imprimirString(materia_mayor + " Tiene " + mayor + " Estudiantes Perdiendo esta asignatura");
+				miconsola.imprimirString("Mayor " + mayor + " " + materia_mayor);
+				miconsola.imprimirString("Segundo mayor " + segundo_m + " " + materia_segmayor);
+				miconsola.imprimirString("menor " + menor + " " + materia_menor);
+			}
+			
 		}
 	}
+	
 
 	public double nota_materia1() {
 		Random random = new Random();
