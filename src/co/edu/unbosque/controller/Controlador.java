@@ -30,12 +30,13 @@ public class Controlador {
 
 	public void ejecutar() {
 		while (ciclo = true) {
-
+			try {
 			miconsola.imprimirString("Taller");
 			miconsola.imprimirString(
-					"1) Cargar estudiantes 2) Estudiante mejor promedio  3) Materia que mas perdieron estudiantes  4)   5) ");
+					"1) Cargar estudiantes 2) Estudiante mejor promedio  3) Materia que mas perdieron estudiantes  4) Mostrar  5) Salir");
 
-			int eleccion = miconsola.leerEntero();
+			String eleccion21 = miconsola.leerTexto();
+			int eleccion = Integer.parseInt(eleccion21);
 			switch (eleccion) {
 			case 1:
 
@@ -96,7 +97,31 @@ public class Controlador {
 				}
 				break;
 			case 4:
+				miconsola.imprimirString(
+						"1) Mostrar Estudiantes 2) Mostrar Materia 1  3) Mostrar Materia 2  4) Mostrar Materia 3 ");
 
+				int eleccion1 = miconsola.leerEntero();
+				
+			switch (eleccion1) {
+			case 1:
+				model.getEstudao().mostrar();
+				break;
+			case 2:
+				model.getAsigdao().mostrar_materia1();
+				break;
+			case 3:
+				model.getAsigdao().mostrar_materia2();
+				break;
+			case 4:
+				model.getAsigdao().mostrar_materia3();
+				break;
+
+			default:
+				miconsola.imprimirString("Error");
+
+				break;
+			}
+				
 				break;
 			case 5:
 
@@ -104,10 +129,13 @@ public class Controlador {
 				break;
 
 			default:
-
+				miconsola.imprimirString("Error");
 				break;
+			}} catch (Exception e) {
+				miconsola.imprimirString("Error");
 			}
 		}
+			
 
 	}
 
